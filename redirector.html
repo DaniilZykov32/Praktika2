@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Эта ссылка ведёт на внешний сайт, вы уверены, что хотите перейти?</p>
+    <button onclick="accept()">да</button>
+    <button onclick="decline()">нет</button>
+    <script>
+        function getHashValue(key) {
+            let lochash = location.hash.substr(1)
+            return lochash.substr(lochash.search(new RegExp(`(?<=^|&)${key}=`)))
+                        .split('&')[0]
+                        .split('=')[1];
+        }
+        function accept() {
+            window.location.replace(decodeURIComponent(getHashValue("link")))
+        }
+        function decline() {
+            window.location.replace(decodeURIComponent(getHashValue("from")))
+        }
+    </script>
+</body>
+</html>
